@@ -27,6 +27,7 @@ class App extends React.Component {
         }
         return response.json()
       }).then(data => {
+        console.log(data.items.volumeInfo)
         this.setState({
           bookList: data.items
         })

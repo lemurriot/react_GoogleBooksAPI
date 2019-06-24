@@ -7,14 +7,14 @@ export default function BookList(props) {
         id={`book-${i}`}
         title={item.volumeInfo.title} 
         authors={item.volumeInfo.authors}
+        description={item.volumeInfo.description}
         imgURL={item.volumeInfo.imageLinks.thumbnail}
+        price={item.saleInfo.retailPrice ? item.saleInfo.retailPrice.amount : 'Not for Sale'}
         />)
     return (
-        <div>
-            BookList
+        
             <ul className="bookList__container">
                 {listings}
             </ul>
-        </div>
     )
 }

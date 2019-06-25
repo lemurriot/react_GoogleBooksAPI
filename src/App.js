@@ -8,18 +8,19 @@ class App extends React.Component {
     super(props)
     this.state = {
       bookList: [],
-      searchTerm: 'George Washington',
+      searchTerm: '',
       printType: '',
       bookType: ''
     }
   }
-  componentDidMount(){
+
+  fetchData(){
+    console.log('fetching data')
     const baseURL = 'https://www.googleapis.com/books/v1/volumes?q='
     const searchTerm = this.state.searchTerm
-    const apiKey = 'AIzaSyA6_w4QEiwd5ILb3-kVFsmTAy0Hp_4d6Wg'
+    const apiKey = 'AIzaSyCzQ4YnQ6IpTnnZxkMsZBsR8MQEvZ1c9Mw'
     const url = encodeURI(`${baseURL}${searchTerm}&key=${apiKey}`)
-    console.log(url)
-
+  
     fetch(url)
       .then(response => {
         if (!response.ok){
@@ -27,7 +28,6 @@ class App extends React.Component {
         }
         return response.json()
       }).then(data => {
-        console.log(data.items.volumeInfo)
         this.setState({
           bookList: data.items
         })
@@ -38,13 +38,26 @@ class App extends React.Component {
         })
       })
   }
+  updateSearchTerm(searchTerm){
+    this.setState({
+      searchTerm
+    })
+}
+
+  onSearchTermSubmit(){
+      this.fetchData()
+  }
 
   render(){
     
     return (
       <main className="App">
         <h1>Google Books Search</h1>
-        <SearchAndFilter />
+        <SearchAndFilter 
+          searchTerm={this.state.searchTerm}
+          handleSearchTermSubmit={term => this.onSearchTermSubmit(term)}
+          updateSearchTerm={term => this.updateSearchTerm(term)}
+        />
         <BookList bookList={this.state.bookList}/>
       </main>
     );

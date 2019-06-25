@@ -6,7 +6,11 @@ import PrintType from './printType/PrintType.js'
 export default function SearchAndFilter(props) {
     return (
         <div>
-            <SearchBar />
+            <SearchBar 
+                searchTerm={props.searchTerm}
+                handleSearchTermSubmit={props.handleSearchTermSubmit}
+                updateSearchTerm={props.updateSearchTerm}
+            />
             <div className="filter__forms">
                 <BookType />
                 <PrintType />

@@ -12,8 +12,14 @@ export default function SearchAndFilter(props) {
                 updateSearchTerm={props.updateSearchTerm}
             />
             <div className="filter__forms">
-                <BookType />
-                <PrintType />
+                <BookType 
+                    onBookTypeChange={props.onBookTypeChange}
+                    bookType={props.bookType}
+                />
+                <PrintType 
+                    onPrintTypeChange={props.onPrintTypeChange}
+                    printType={props.printType}
+                />
             </div>
         </div>
     )
